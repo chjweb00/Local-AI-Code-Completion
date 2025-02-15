@@ -19,7 +19,7 @@ You delete a non-accepted completion by pressing <kbd>Escape</kbd>.
 
 GIF is sped up.
 
-![usage example](./assets/lacc-example.gif)
+![image](https://github.com/user-attachments/assets/01601f42-7c56-45fa-bae0-ebd058d177c3)
 
 The extension uses codellama 7B under the hood, which supports many languages including Python, C++, Java, PHP, Typescript (Javascript), C# and Bash.
 
