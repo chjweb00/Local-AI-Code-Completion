@@ -1,0 +1,108 @@
+{
+	"name": "local-ai-code-completion",
+	"displayName": "Local AI Code Completion",
+	"description": "Experience the power of AI-assisted coding, all while ensuring your privacy and wallet. This extension runs entirely on your local machine, you can enjoy intelligent coding without compromising the integrity of your code or budget.",
+	"icon": "./assets/lacc.png",
+	"publisher": "chjweb",
+	"version": "1.2.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Plazide/local-ai-code-completion"
+	},
+	"engines": {
+		"vscode": "^1.83.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [],
+	"main": "./out/extension.js",
+	"contributes": {
+		"configuration": {
+			"title": "LocalAiCodeCompletion",
+			"properties": {
+				"chjweb.local-ai-code-completion.model.name": {
+					"type": "string",
+					"default": "codellama:7b-code-q4_K_S",
+					"description": "Define which model ollama should use."
+				},
+				"chjweb.local-ai-code-completion.model.temperature": {
+					"type": "number",
+					"default": 0.3,
+					"minimum": 0,
+					"maximum": 2,
+					"description": "Level of randomness in generating responses. 0 = Deterministic, 0.3 - 0.7 ~= 'optimal' range, 1+ for the adventurous type"
+				},
+				"chjweb.local-ai-code-completion.model.top_p": {
+					"type": "number",
+					"default": 0.3,
+					"minimum": 0,
+					"maximum": 1,
+					"description": "Controls diverse output by filtering probabilities. Higher values include more choices, impacting generated sequences dynamically."
+				}
+			}
+		},
+		"commands": [
+			{
+				"command": "local-ai-code-completion.generateCode",
+				"title": "Generate code"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "local-ai-code-completion.generateCode",
+				"key": "Ctrl+Alt+C",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "local-ai-code-completion.abortGeneration",
+				"key": "escape",
+				"when": "editorTextFocus && generatingCompletion"
+			},
+			{
+				"command": "local-ai-code-completion.cancel",
+				"key": "escape",
+				"when": "editorTextFocus && completionAvailable"
+			},
+			{
+				"command": "local-ai-code-completion.cancel",
+				"key": "down",
+				"when": "editorTextFocus && completionAvailable"
+			},
+			{
+				"command": "local-ai-code-completion.cancel",
+				"key": "up",
+				"when": "editorTextFocus && completionAvailable"
+			},
+			{
+				"command": "local-ai-code-completion.accept",
+				"key": "tab",
+				"when": "editorTextFocus && completionAvailable"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "yarn run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "yarn run compile && yarn run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/mocha": "^10.0.2",
+		"@types/node": "^20.8.7",
+		"@types/vscode": "^1.83.0",
+		"@typescript-eslint/eslint-plugin": "^6.7.3",
+		"@typescript-eslint/parser": "^6.7.3",
+		"@vscode/test-electron": "^2.3.4",
+		"glob": "^10.3.3",
+		"mocha": "^10.2.0",
+		"prettier": "^3.0.3",
+		"typescript": "^5.2.2"
+	},
+	"dependencies": {
+		"langchain": "^0.0.169",
+		"ollama": "^0.3.0"
+	}
+}
