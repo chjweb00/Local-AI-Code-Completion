@@ -1,3 +1,4 @@
+Our official 𝕏 : https://x.com/laicc_x
 # local-ai-code-completion README
 
 Enables AI Assisted code completion, similar to Github Copilot, completely locally. No code leaves your machine. This has two major benefits:
